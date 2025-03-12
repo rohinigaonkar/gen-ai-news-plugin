@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "ELIF Gen-AI Top Weekly News",
+  "version": "1.0",
+  "description": "Explains the top 3 Gen AI news of the week like you're five years old",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://newsapi.org/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/icon16.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  }
+} 
