@@ -1,4 +1,6 @@
-const NEWS_API_KEY = '8c8e04cf2b2743759dcd2310f0a31df5';
+import config from './config.js';
+
+const NEWS_API_KEY = config.NEWS_API_KEY;
 const NEWS_API_ENDPOINT = 'https://newsapi.org/v2/everything';
 const NEWS_PER_PAGE = 3;
 let currentPage = 1;

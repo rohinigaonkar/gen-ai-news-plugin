@@ -23,10 +23,13 @@ A Chrome browser extension that provides weekly curated news about Generative AI
 
 ## Configuration
 
-1. Get your API keys:
+1. Get your API key:
    - Sign up for [NewsAPI](https://newsapi.org/) to get your API key
 
-2. Add your API keys to the configuration file popup.js
+2. Setup configuration:
+   - Copy `config.template.js` to `config.js`
+   - Add your NewsAPI key to `config.js`
+   - Note: `config.js` is gitignored to protect your API keys
 
 ## Usage
 
