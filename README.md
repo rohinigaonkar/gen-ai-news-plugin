@@ -8,6 +8,8 @@ A Chrome browser extension that provides weekly curated news about Generative AI
 - Weekly updates to keep you informed about Gen AI developments
 - Easy-to-use Chrome browser extension interface
 
+[![YouTube video](https://img.youtube.com/vi/Tof4_4ZNdKM/0.jpg)](https://www.youtube.com/watch?v=Tof4_4ZNdKM)
+
 ## Installation
 
 1. Clone this repository:
