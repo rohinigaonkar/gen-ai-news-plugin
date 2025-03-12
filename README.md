@@ -37,15 +37,17 @@ A Chrome browser extension that provides weekly curated news about Generative AI
 2. View the latest Gen AI news summaries
 3. Click on any article to read the full content
 
-## Technologies Used
+## Tools & Technologies Used
 
+- [Cursor, AI Code editor](https://www.cursor.com/)
+- [Google Chrome Extensions API](https://developer.chrome.com/)
+- [NewsAPI](https://newsapi.org/)
 - JavaScript
-- Chrome Extensions API
-- NewsAPI
+
+## Future Work
+- Add a feature to generate summaries as to explain it to five year old using OpenAI, Gemini, or Claude. Branch ELIF has all the code for this, need a paid OpenAI key to run it.
+
 
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
-
-## Future Work
-- Add a feature to generate summaries as to explain it to five year old using OpenAI, Gemini, or Claude. Branch ELIF has all the code for this, need a paid OpenAI key to run it.
