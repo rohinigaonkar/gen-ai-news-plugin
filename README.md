@@ -48,4 +48,4 @@ A Chrome browser extension that provides weekly curated news about Generative AI
 Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Future Work
-- Add a feature to generate summaries as to explain it to five year oldusing OpenAI, Gemini, or Claude. 
+- Add a feature to generate summaries as to explain it to five year old using OpenAI, Gemini, or Claude. Branch ELIF has all the code for this, need a paid OpenAI key to run it.
