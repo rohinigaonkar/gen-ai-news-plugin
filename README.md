@@ -7,6 +7,7 @@ A Chrome browser extension that provides weekly curated news about Generative AI
 - Fetches latest Generative AI news articles using NewsAPI
 - Weekly updates to keep you informed about Gen AI developments
 - Easy-to-use Chrome browser extension interface
+- ELI5 (Explain Like I'm Five) feature for each article using OpenAI
 
 ## Installation
 
@@ -23,12 +24,13 @@ A Chrome browser extension that provides weekly curated news about Generative AI
 
 ## Configuration
 
-1. Get your API key:
+1. Get your API keys:
    - Sign up for [NewsAPI](https://newsapi.org/) to get your API key
+   - Sign up for [OpenAI](https://platform.openai.com/) to get your API key
 
 2. Setup configuration:
    - Copy `config.template.js` to `config.js`
-   - Add your NewsAPI key to `config.js`
+   - Add your NewsAPI and OpenAI keys to `config.js`
    - Note: `config.js` is gitignored to protect your API keys
 
 ## Usage

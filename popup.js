@@ -6,6 +6,9 @@ const NEWS_PER_PAGE = 3;
 let currentPage = 1;
 let allNews = [];
 
+// Add new constants for OpenAI
+const OPENAI_API_ENDPOINT = 'https://api.openai.com/v1/chat/completions';
+
 document.addEventListener('DOMContentLoaded', function() {
   // Load and display news
   loadNews();
@@ -101,6 +104,9 @@ function displayNewsPage(page) {
     `;
     newsContainer.appendChild(newsItem);
   });
+
+  // Call setupELI5Feature after displaying news items
+  setupELI5Feature();
 }
 
 function setupPagination() {
@@ -129,4 +135,84 @@ function updatePaginationActive(page) {
       btn.classList.add('active');
     }
   });
+}
+
+function setupELI5Feature() {
+  const newsContainer = document.getElementById('newsContainer');
+  
+  // Add ELI5 input section to each news item
+  document.querySelectorAll('.news-item').forEach(item => {
+    const eli5Section = document.createElement('div');
+    eli5Section.className = 'eli5-section';
+    eli5Section.innerHTML = `
+      <button class="eli5-btn">Explain Like I'm Five</button>
+      <div class="eli5-explanation hidden"></div>
+    `;
+    
+    const eli5Btn = eli5Section.querySelector('.eli5-btn');
+    const eli5Explanation = eli5Section.querySelector('.eli5-explanation');
+    
+    eli5Btn.addEventListener('click', async () => {
+      const url = item.querySelector('a').href;
+      const title = item.querySelector('a').textContent;
+      const description = item.querySelector('.simple-explanation').textContent;
+      
+      eli5Btn.disabled = true;
+      eli5Btn.textContent = 'Generating explanation...';
+      eli5Explanation.textContent = 'Loading...';
+      eli5Explanation.classList.remove('hidden');
+      
+      try {
+        const explanation = await getELI5Explanation(title, description);
+        eli5Explanation.textContent = explanation;
+      } catch (error) {
+        eli5Explanation.textContent = `Error: ${error.message}`;
+      } finally {
+        eli5Btn.disabled = false;
+        eli5Btn.textContent = "Explain Like I'm Five";
+      }
+    });
+    
+    item.appendChild(eli5Section);
+  });
+}
+
+async function getELI5Explanation(title, description) {
+  const prompt = `Please explain this tech news in simple terms that a 5-year-old would understand:\n\nTitle: ${title}\n\nDescription: ${description}`;
+  
+  try {
+    const response = await fetch(OPENAI_API_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${config.OPENAI_API_KEY}`
+      },
+      body: JSON.stringify({
+        model: "gpt-3.5-turbo",
+        messages: [
+          {
+            role: "system",
+            content: "You are a helpful assistant that explains complex tech news to 5-year-olds."
+          },
+          {
+            role: "user",
+            content: prompt
+          }
+        ],
+        temperature: 0.7,
+        max_tokens: 200
+      })
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error?.message || 'Failed to get explanation');
+    }
+
+    const data = await response.json();
+    return data.choices[0].message.content;
+  } catch (error) {
+    console.error('OpenAI API Error:', error);
+    throw new Error(`OpenAI API Error: ${error.message}`);
+  }
 } 
