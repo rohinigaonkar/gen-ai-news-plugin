@@ -6,8 +6,8 @@ const NEWS_PER_PAGE = 3;
 let currentPage = 1;
 let allNews = [];
 
-// Add new constants for OpenAI
-const OPENAI_API_ENDPOINT = 'https://api.openai.com/v1/chat/completions';
+// Update to use Gemini Flash 2.0 endpoint
+const GEMINI_API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
 
 document.addEventListener('DOMContentLoaded', function() {
   // Load and display news
@@ -181,26 +181,23 @@ async function getELI5Explanation(title, description) {
   const prompt = `Please explain this tech news in simple terms that a 5-year-old would understand:\n\nTitle: ${title}\n\nDescription: ${description}`;
   
   try {
-    const response = await fetch(OPENAI_API_ENDPOINT, {
+    const response = await fetch(`${GEMINI_API_ENDPOINT}?key=${config.GEMINI_API_KEY}`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${config.OPENAI_API_KEY}`
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: "gpt-3.5-turbo",
-        messages: [
-          {
-            role: "system",
-            content: "You are a helpful assistant that explains complex tech news to 5-year-olds."
-          },
-          {
-            role: "user",
-            content: prompt
-          }
-        ],
-        temperature: 0.7,
-        max_tokens: 200
+        contents: [{
+          parts: [{
+            text: prompt
+          }]
+        }],
+        generationConfig: {
+          temperature: 0.7,
+          maxOutputTokens: 200,
+          topP: 0.8,
+          topK: 40
+        }
       })
     });
 
@@ -210,9 +207,9 @@ async function getELI5Explanation(title, description) {
     }
 
     const data = await response.json();
-    return data.choices[0].message.content;
+    return data.candidates[0].content.parts[0].text;
   } catch (error) {
-    console.error('OpenAI API Error:', error);
-    throw new Error(`OpenAI API Error: ${error.message}`);
+    console.error('Gemini API Error:', error);
+    throw new Error(`Gemini API Error: ${error.message}`);
   }
 } 
