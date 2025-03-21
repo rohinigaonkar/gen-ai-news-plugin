@@ -5,10 +5,9 @@ A Chrome browser extension that provides weekly curated news about Generative AI
 ## Features
 
 - Fetches latest Generative AI news articles using NewsAPI
-- Explains complex tech news in simple terms using Google's Gemini Flash 2.0
+- ELI5 (Explain Like I'm Five) button for each article, explains complex tech news in simple terms using Google's Gemini Flash 2.0
 - Weekly updates to keep you informed about Gen AI developments
 - Easy-to-use Chrome browser extension interface
-- ELI5 (Explain Like I'm Five) button for each article
 
 ## Installation
 
